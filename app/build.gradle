@@ -1,0 +1,68 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+
+    defaultConfig {
+        applicationId "com.genialsir.opencvdemo"
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        externalNativeBuild {
+            cmake {
+                cppFlags ""
+//                abiFilters "arm64-v8a"
+                abiFilters "armeabi-v7a"
+
+//                arguments "-DANDROID_STL=c++_static"
+
+                arguments "-DANDROID_STL=c++_shared"
+            }
+        }
+        ndk {
+            //个人理解ndk{}，在项目不携带C/C++代码时，APP在运行期间所支持的SO库类型。
+            //安装的APP支持的SO库位数
+//            abiFilters "arm64-v8a"
+            abiFilters "armeabi-v7a"
+//            abiFilters "armeabi-v7a", "arm64-v8a"
+        }
+    }
+
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    externalNativeBuild {
+        cmake {
+            path "src/main/cpp/CMakeLists.txt"
+            version "3.10.2"
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+
+}
+
+dependencies {
+
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'com.google.android.material:material:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    implementation project(':open_cv_java');
+}

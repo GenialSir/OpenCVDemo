@@ -1,0 +1,9 @@
+//
+// Created by GenialSir on 2021/6/22.
+//
+
+#ifndef OPENCVDEMO_FACE_DETECTOR_H
+#define OPENCVDEMO_FACE_DETECTOR_H
+
+
+#endif //OPENCVDEMO_FACE_DETECTOR_H
